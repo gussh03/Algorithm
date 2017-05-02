@@ -1,50 +1,35 @@
 #include<iostream>
-#include<queue>
 using namespace std;
-int n;
-int map[102][102];
-int tmp[102][102];
-
-typedef struct pos {
-	int x;
-	int y;
-}Pos;
-Pos p[102]; //구조체 배열
-int cnt = 0; //구조체배열의 인덱스
+int num, arr[102][102];
 void input() {
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			cin >> map[i][j];
-			if (map[i][j] == 1) {
-				p[cnt].x = j;
-				p[cnt].y = i;
-				cnt++;
+	cin >> num;
+	for (int i = 1; i <= num; i++) {
+		for (int j = 1; j <= num; j++) {
+			cin >> arr[i][j];
+		}
+	}
+}
+void floyd() {
+	for (int s = 1; s <= num; s++) {
+		for (int start = 1; start <= num; start++) {
+			for (int end = 1; end <= num; end++) {
+				if (arr[start][s] && arr[s][end])
+					arr[start][end] = 1;
 			}
 		}
 	}
 }
-
-void bfs(int x, int y) {
-	int tx, ty;
-	tx = x;
-	ty = y;
-	if(                                                                                                                                     )
-	for (int i = 0; i < n; i++) {
-		if (map[tx][i] == 1) {
-			bfs(i, tx);
+void print() {
+	for (int i = 1; i <= num; i++) {
+		for (int j = 1; j <= num; j++) {
+			cout << arr[i][j] << " ";
 		}
+		cout << endl;
 	}
 }
-
-
 int main() {
 	input();
-
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			bfs(j, i);
-		}
-	}
+	floyd();
+	print();
 	return 0;
 }

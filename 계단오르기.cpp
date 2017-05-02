@@ -1,16 +1,25 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
-int num, stair[302];
+int stairsNum, arr[302];
 void input() {
-	cin >> num;
-	for (int i = 0; i < num; i++) cin >> stair[i];
+	cin >> stairsNum;
+	for (int i = 1; i <= stairsNum; i++)
+		cin >> arr[i];
 }
-void dp() {
-	int startNum = stair[num - 1];
-
+int dp() {
+	int res = 0;
+	for (int i = 1; i <= stairsNum; i++) {
+		arr[i] = max(arr[i + 1] + arr[i], arr[i + 2] + arr[i]) + arr[i];
+	}
+	return arr[stairsNum];
 }
 int main() {
 	input();
-	dp();
+
+	cout << dp() << endl;
+	for (int i = 0; i <= stairsNum; i++) {
+		cout << arr[i] << " ";
+	}
 	return 0;
 }
